@@ -1,0 +1,89 @@
+; ---------------------------------------------------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+; -------------------------------- snakeOS.asm ------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+
+; ------------------------------ DRAW_PIXEL x40 ------------------------------ ;
+; Description: draws a pixel on an x-y coordinate system
+; Input
+;   r0: x coordinate (column number)
+;   r1: y coordinate (row number)
+;   r2: pixel color
+; Output
+;   video memory will be updated to place block of appropriate color
+
+; --------------------------- GET_PIXEL_COLOR x41 ---------------------------- ;
+; Description: retrieves a pixel's color using x-y coordinate system
+; Input
+;   r0: x coordinate (column number)
+;   r1: y coordinate (row number)
+; Output
+;   r5: color of pixel at the specified position
+
+; ---------------------------- RANDOM_NUMBER x43 ----------------------------- ;
+; Description: retrieves a block's color
+; Input
+;   None
+; Output
+;   r5: pseudo-random number
+
+; ------------------------------ GET_EVENT x42 ------------------------------- ;
+; Description: wait for event (either timer tick or keyboard).
+; Input
+;   none
+; Output
+;   r5: an integer indicating what event has happened
+;        0 (timer), -1 (quit), 1 (left), 2 (up), 3 (right), 4 (down)
+
+; ---------------------------------------------------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+; --------------------------------- snake.asm -------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+; ---------------------------------------------------------------------------- ;
+
+; -------------------------------- ENQUEUE_POS ------------------------------- ;
+; Description: enqueues x and y coordinate to snake queue
+; Input
+;   r0: address of snake variable
+;   r5: x coordinate (column number)
+;   r6: y coordinate (row number)
+; Output
+;   none
+
+; -------------------------------- DEQUEUE_POS ------------------------------- ;
+; Description: dequeues x and y coordinate to snake queue
+; Input
+;   r0: address of snake variable
+; Output
+;   r5: x coordinate (column number)
+;   r6: y coordinate (row number)
+
+; ------------------------------ CHECK_COLLISION ----------------------------- ;
+; Description: checks for collision
+; Input
+;   r0: address of snake variable
+; Output
+;   r5: 1 if collision, 0 if no collision, -1 if apple
+
+; --------------------------------- GET_NEXT --------------------------------- ;
+; Description: gets the next position for the snake's head
+; Input
+;   r0: address of snake variable
+; Output
+;   r5: next x position (column number)
+;   r6: next y position (row number)
+
+; ---------------------------- PLACE_RANDOM_APPLE ---------------------------- ;
+; Description: places the next random apple on the screen
+; Input
+;   None
+; Output
+;   None
+
+; ------------------------------- ADVANCE_SNAKE ------------------------------ ;
+; Description: advances the snake to the next position
+; Input
+;   r0: address of snake variable
+; Output
+;   None
